@@ -21,14 +21,12 @@ public class CarController {
         return ResponseEntity.ok(carService.getCarInfoById(id));
     }
 
-    // SLOTS : NULL
     @PostMapping("/{parkingId}/{slotId}")
     public ResponseEntity<Car> parkCar(@PathVariable Integer parkingId, @PathVariable Integer slotId, @RequestBody Car car) {
         return ResponseEntity.ok(carService.parkCar(parkingId, slotId, car));
     }
 
 
-//    LAST PROBLEM
     @DeleteMapping("/{id}")
     public ResponseEntity<List<Car>> unParkCar(@PathVariable Integer id) {
         carService.deleteCar(id);
