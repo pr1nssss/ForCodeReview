@@ -46,8 +46,16 @@ public class CarService {
         return carRepository.save(car);
     }
 
-    public void deleteCar(Integer id) {
-        carRepository.deleteById(id);
+    public void deleteCar(Integer carConductionNumber) {
+        var slot = slotRepository
+                .findByCarConductionNumber(carConductionNumber)
+                .orElseThrow(() -> new SlotNotFoundException("Slot not found!"));
+
+        var car = slot.getCar();
+        slot.setCar(null);
+
+        slotRepository.save(slot);
+        carRepository.delete(car);
     }
 
     public List<Car> getAllCars() {

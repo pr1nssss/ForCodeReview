@@ -2,6 +2,7 @@ package com.parkingapi.Parking.controllers;
 
 import com.parkingapi.Parking.models.Car;
 import com.parkingapi.Parking.services.CarService;
+import com.parkingapi.Parking.services.SlotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,6 @@ public class CarController {
 
     private final CarService carService;
 
-    // id = conduction sticker
     @GetMapping("/{id}")
     public ResponseEntity<Car> getCarInfo(@PathVariable Integer id) {
         return ResponseEntity.ok(carService.getCarInfoById(id));

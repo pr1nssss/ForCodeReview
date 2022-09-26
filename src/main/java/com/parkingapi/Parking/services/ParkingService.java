@@ -15,18 +15,13 @@ public class ParkingService {
     private final ParkingRepository parkingRepository;
 
     public Parking getParkingById(Integer id) {
-        Optional<Parking> optional = parkingRepository.findById(id);
-        if (optional.isEmpty())
-            throw new ParkingNotFoundException("Parking 404!");
-        return optional.get();
+        return parkingRepository
+                .findById(id)
+                .orElseThrow(() -> new ParkingNotFoundException("Parking not found!"));
     }
 
-    public List<Parking> getAllParking(){
+    public List<Parking> getAllParking() {
         return parkingRepository.findAll();
-    }
-
-    public boolean hasAvailableSlot(){
-        return parkingRepository.findAll().contains(null);
     }
 
     public Parking createParking(Parking parking) {
@@ -34,8 +29,7 @@ public class ParkingService {
     }
 
     public void deleteParking(Integer id) {
-            parkingRepository.deleteById(id);
+        parkingRepository.deleteById(id);
     }
-
 }
 

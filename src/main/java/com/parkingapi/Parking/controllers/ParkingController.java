@@ -15,25 +15,21 @@ public class ParkingController {
 
     private final ParkingService parkingService;
 
-    // ADD PARKING NOT FOUND EXCEPTION
     @GetMapping("/{id}")
     public ResponseEntity<Parking> getParkingById(@PathVariable Integer id) {
         return ResponseEntity.ok(parkingService.getParkingById(id));
     }
-
 
     @GetMapping
     public ResponseEntity<List<Parking>> getAllParking(){
         return ResponseEntity.ok(parkingService.getAllParking());
     }
 
-
     @PostMapping
     public ResponseEntity<Parking> createParking(@RequestBody Parking parking) {
         return ResponseEntity.ok(parkingService.createParking(parking));
     }
 
-//  NOT WORKING POSSIBLE BECAUSE OF RETURN TYPE
     @DeleteMapping("/{id}")
     public ResponseEntity<List<Parking>> deleteParking(@PathVariable Integer id) {
         parkingService.deleteParking(id);

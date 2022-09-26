@@ -19,7 +19,8 @@ public class Slot {
     @Column(name = "NAME")
     private String name;
 
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "CAR_CONDUCTION_NUMBER", referencedColumnName = "CONDUCTION_NUMBER")
     @JsonIgnoreProperties(value = {"slot"})
     private Car car;

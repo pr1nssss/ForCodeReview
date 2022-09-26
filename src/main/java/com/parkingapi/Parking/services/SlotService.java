@@ -26,7 +26,8 @@ public class SlotService {
     }
 
     public List<Slot> bulkCreateSlots(Integer parkingId, List<Slot> slots) {
-        slots.forEach(slot -> slot.setParking(parkingService.getParkingById(parkingId)));
+        var parking = parkingService.getParkingById(parkingId);
+        slots.forEach(slot -> slot.setParking(parking));
         return slotRepository.saveAll(slots);
     }
 

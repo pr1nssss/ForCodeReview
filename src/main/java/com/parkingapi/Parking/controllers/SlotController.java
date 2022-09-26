@@ -1,5 +1,6 @@
 package com.parkingapi.Parking.controllers;
 
+import com.parkingapi.Parking.Exceptions.SlotOccupiedException;
 import com.parkingapi.Parking.models.Slot;
 import com.parkingapi.Parking.services.SlotService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,6 @@ public class SlotController {
 
     private final SlotService slotService;
 
-    //    NOT WORKING PROPERLY. BECAUSE OF IS PRESENT INSTEAD OF IS EMPTY
     @GetMapping("/{id}")
     public ResponseEntity<Boolean> checkSlotAvailability(@PathVariable Integer id) {
         return ResponseEntity.ok(slotService.isAvailable(id));
@@ -31,7 +31,7 @@ public class SlotController {
         if (slotService.isAvailable(id))
             slotService.deleteSlot(id);
         else {
-            System.out.println("Slot is occupied!");
+            throw new SlotOccupiedException("Slot is occupied!");
         }
         return ResponseEntity.ok(slotService.getAllSlots());
     }

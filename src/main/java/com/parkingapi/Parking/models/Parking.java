@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "Parking")
+@JsonIgnoreProperties(value = {"slots"}, allowGetters = true)
 public class Parking {
 
     @Id
@@ -20,8 +21,8 @@ public class Parking {
     @Column(name = "NAME", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "parking")
-    @JsonIgnoreProperties(value = {"parking"}, allowSetters = true)
+    @OneToMany(mappedBy = "parking", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = {"parking"})
     private List<Slot> slots;
 
     public void addSlot(Slot slot) {
