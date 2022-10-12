@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: db/changesets/PARKING-SCHEMA2.xml
